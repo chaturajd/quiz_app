@@ -5,25 +5,48 @@ class QuestionTemplate extends StatelessWidget {
   final List<String> answers;
   final Function onAnswerClick;
   final questionIndex;
-  
-  QuestionTemplate({this.question, this.answers, this.onAnswerClick, this.questionIndex});
+  final Color bgColor;
+
+  QuestionTemplate(
+      {this.question,
+      this.answers,
+      this.onAnswerClick,
+      this.questionIndex,
+      this.bgColor});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-          child: Container(
+      child: Container(
+        color: bgColor == null ? Colors.white : bgColor,
         child: Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
-                child: Text(
-                  question,
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white12,
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        question,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
                 ),
+              ),
+              SizedBox(
+                height: 60,
               ),
               Column(
                 children: answerWidgets(answers),
@@ -40,7 +63,7 @@ class QuestionTemplate extends StatelessWidget {
     for (var i = 0; i < answers.length; i++) {
       answerButtons.add(AnswerButton(
         answer: answers[i],
-        onClick: () => {onAnswerClick(answers[i],questionIndex)},
+        onClick: () => {onAnswerClick(answers[i], questionIndex)},
       ));
     }
     answerButtons.shuffle();
@@ -57,10 +80,25 @@ class AnswerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: RaisedButton(
-        onPressed: onClick,
-        child: Text(answer),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: onClick,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.black26, borderRadius: BorderRadius.circular(15)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 35),
+            child: Text(
+              answer,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

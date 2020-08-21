@@ -7,28 +7,42 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuestionScreen(),
+      backgroundColor: Colors.amber,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuestionScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                );
-              },
-              child: Text("Start"),
-            ),
-            RaisedButton(
-              onPressed: () {},
-              child: Text("data"),
-            ),
-          ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 45,vertical: 15),
+                    child: Text(
+                      "START",
+                      style: TextStyle(
+                        fontSize: 48,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
